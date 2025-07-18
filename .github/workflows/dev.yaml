@@ -21,7 +21,7 @@ name: BTHL-HealthCare CI/CD Pipeline
 on:
   # I trigger on push to main branch for immediate feedback on mainline changes
   push:
-    branches: [ main, develop ]
+    branches: [ production, develop ]
     # I exclude certain files that don't affect code quality to optimize pipeline efficiency
     paths-ignore:
       - '**.md'
@@ -30,7 +30,7 @@ on:
       
   # I trigger on pull requests to ensure all proposed changes meet quality standards
   pull_request:
-    branches: [ main, develop ]
+    branches: [ production, develop ]
     types: [opened, synchronize, reopened]
     
   # I allow manual workflow dispatch for on-demand builds and releases
