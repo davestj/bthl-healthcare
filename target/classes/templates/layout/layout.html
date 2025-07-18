@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--
+    File: /var/www/davestj.com/bthl-hc/src/main/resources/templates/layout/layout.html
+    Author: davestj (David St John)
+    Date: 2025-07-16
+    Purpose: Main Thymeleaf layout template for BTHL-HealthCare platform
+    Description: I designed this layout template to provide a consistent, modern, and responsive
+                 foundation for all pages in my healthcare management platform. I've included
+                 comprehensive navigation, security features, and accessibility support.
+    
+    Changelog:
+    2025-07-16: Initial creation of main layout template with modern responsive design
+    
+    Git Commit: git commit -m "feat: add main layout template with modern responsive design and navigation"
+    
+    Next Dev Feature: Add dark mode toggle and advanced accessibility features
+    TODO: Implement progressive web app manifest and service worker integration
+-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" th:content="${pageDescription ?: 'BTHL-HealthCare - Comprehensive Healthcare Management Platform'}">
+    <meta name="author" content="David St John - davestj">
+    
+    <!-- I implement security headers for enhanced protection -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- I set the page title with application branding -->
+    <title th:text="${pageTitle != null ? pageTitle + ' | BTHL-HealthCare' : 'BTHL-HealthCare Platform'}">BTHL-HealthCare</title>
+    
+    <!-- I include Font Awesome for comprehensive icon support -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- I include my custom CSS for modern styling -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    
+    <!-- I add page-specific CSS if provided -->
+    <th:block th:if="${additionalCSS}">
+        <link rel="stylesheet" th:each="css : ${additionalCSS}" th:href="@{${css}}">
+    </th:block>
+    
+    <!-- I implement favicon for professional branding -->
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/apple-touch-icon.png}">
+    
+    <!-- I add CSRF token for secure form submissions -->
+    <meta name="_csrf" th:content="${_csrf?.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}"/>
+</head>
+
+<body class="modern-layout" th:classappend="${bodyClass}">
+    
+    <!-- I create a loading spinner for enhanced user experience -->
+    <div id="loading-spinner" class="loading-overlay">
+        <div class="spinner">
+            <i class="fas fa-heartbeat fa-2x text-primary"></i>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    <!-- I implement the main navigation header -->
+    <header class="main-header" th:fragment="header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                
+                <!-- I create the brand logo and title -->
+                <a class="navbar-brand" th:href="@{/}">
+                    <i class="fas fa-heartbeat me-2 text-primary"></i>
+                    <span class="brand-text">BTHL-HealthCare</span>
+                </a>
+
+                <!-- I implement mobile menu toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- I create the main navigation menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    
+                    <!-- I implement left-side navigation for authenticated users -->
+                    <ul class="navbar-nav me-auto" sec:authorize="isAuthenticated()">
+                        
+                        <!-- I add dashboard navigation based on user role -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/dashboard}">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <!-- I add admin-specific navigation -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-users-cog me-1"></i>
+                                Administration
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/admin/users}">
+                                    <i class="fas fa-users me-2"></i>User Management</a></li>
+                                <li><a class="dropdown-item" th:href="@{/admin/companies}">
+                                    <i class="fas fa-building me-2"></i>Companies</a></li>
+                                <li><a class="dropdown-item" th:href="@{/admin/providers}">
+                                    <i class="fas fa-hospital me-2"></i>Providers</a></li>
+                                <li><a class="dropdown-item" th:href="@{/admin/brokers}">
+                                    <i class="fas fa-handshake me-2"></i>Brokers</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/admin/audit}">
+                                    <i class="fas fa-clipboard-list me-2"></i>Audit Logs</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- I add broker-specific navigation -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('BROKER')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-briefcase me-1"></i>
+                                Broker Tools
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/broker/clients}">
+                                    <i class="fas fa-users me-2"></i>My Clients</a></li>
+                                <li><a class="dropdown-item" th:href="@{/broker/quotes}">
+                                    <i class="fas fa-calculator me-2"></i>Generate Quotes</a></li>
+                                <li><a class="dropdown-item" th:href="@{/broker/commissions}">
+                                    <i class="fas fa-chart-line me-2"></i>Commissions</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- I add provider-specific navigation -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('PROVIDER')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-hospital me-1"></i>
+                                Provider Portal
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/provider/plans}">
+                                    <i class="fas fa-clipboard-list me-2"></i>My Plans</a></li>
+                                <li><a class="dropdown-item" th:href="@{/provider/network}">
+                                    <i class="fas fa-network-wired me-2"></i>Provider Network</a></li>
+                                <li><a class="dropdown-item" th:href="@{/provider/analytics}">
+                                    <i class="fas fa-chart-bar me-2"></i>Analytics</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- I add company-specific navigation -->
+                        <li class="nav-item dropdown" sec:authorize="hasRole('COMPANY_USER')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-building me-1"></i>
+                                Company Portal
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/company/portfolio}">
+                                    <i class="fas fa-folder me-2"></i>Healthcare Portfolio</a></li>
+                                <li><a class="dropdown-item" th:href="@{/company/employees}">
+                                    <i class="fas fa-users me-2"></i>Employee Management</a></li>
+                                <li><a class="dropdown-item" th:href="@{/company/enrollment}">
+                                    <i class="fas fa-user-plus me-2"></i>Plan Enrollment</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- I implement right-side user menu for authenticated users -->
+                    <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                        
+                        <!-- I add notifications dropdown -->
+                        <li class="nav-item dropdown me-3">
+                            <a class="nav-link notification-bell" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge" id="notificationCount">3</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                                <li class="dropdown-header">Recent Notifications</li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <div class="notification-item">
+                                        <i class="fas fa-info-circle text-info me-2"></i>
+                                        <span>Welcome to BTHL-HealthCare platform</span>
+                                    </div>
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-center" href="#">View All Notifications</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- I create user profile dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle user-profile" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="user-avatar" th:src="${currentUser?.profileImageUrl ?: '/images/default-avatar.png'}" 
+                                     th:alt="${currentUser?.fullName ?: 'User Avatar'}">
+                                <span class="user-name d-none d-md-inline" th:text="${currentUser?.firstName ?: 'User'}">User</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="dropdown-header">
+                                    <div class="user-info">
+                                        <strong th:text="${currentUser?.fullName}">Full Name</strong>
+                                        <small class="text-muted" th:text="${currentUser?.userType?.displayName}">User Type</small>
+                                    </div>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/profile}">
+                                    <i class="fas fa-user me-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <i class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <i class="fas fa-shield-alt me-2"></i>Security</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" class="d-inline">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- I show login/register links for unauthenticated users -->
+                    <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary text-white ms-2" th:href="@{/register}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- I implement the main content area with breadcrumbs -->
+    <main class="main-content">
+        
+        <!-- I add breadcrumb navigation for better UX -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav" th:if="${breadcrumbs}">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/}"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" th:each="crumb, iterStat : ${breadcrumbs}" 
+                        th:classappend="${iterStat.last} ? 'active'" 
+                        th:aria-current="${iterStat.last} ? 'page'">
+                        <a th:if="!${iterStat.last}" th:href="${crumb.url}" th:text="${crumb.title}"></a>
+                        <span th:if="${iterStat.last}" th:text="${crumb.title}"></span>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- I display alert messages for user feedback -->
+        <div class="container-fluid" th:if="${successMessage or errorMessage or warningMessage or infoMessage}">
+            <div class="alert alert-success alert-dismissible fade show" th:if="${successMessage}" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <span th:text="${successMessage}">Success message</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            <div class="alert alert-danger alert-dismissible fade show" th:if="${errorMessage}" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span th:text="${errorMessage}">Error message</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            <div class="alert alert-warning alert-dismissible fade show" th:if="${warningMessage}" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span th:text="${warningMessage}">Warning message</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            <div class="alert alert-info alert-dismissible fade show" th:if="${infoMessage}" role="alert">
+                <i class="fas fa-info-circle me-2"></i>
+                <span th:text="${infoMessage}">Info message</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <!-- I define the main content placeholder -->
+        <div layout:fragment="content">
+            <!-- Page content will be inserted here -->
+        </div>
+    </main>
+
+    <!-- I implement the footer with essential links and information -->
+    <footer class="main-footer" th:fragment="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="footer-brand">
+                        <i class="fas fa-heartbeat me-2 text-primary"></i>
+                        <strong>BTHL-HealthCare</strong>
+                    </div>
+                    <p class="footer-description">
+                        Comprehensive healthcare management platform designed to streamline 
+                        insurance operations and improve healthcare accessibility.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="#" th:href="@{/about}">About Us</a></li>
+                        <li><a href="#" th:href="@{/contact}">Contact</a></li>
+                        <li><a href="#" th:href="@{/privacy}">Privacy Policy</a></li>
+                        <li><a href="#" th:href="@{/terms}">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-title">Support</h6>
+                    <ul class="footer-links">
+                        <li><a href="#" th:href="@{/help}">Help Center</a></li>
+                        <li><a href="#" th:href="@{/documentation}">Documentation</a></li>
+                        <li><a href="#" th:href="@{/status}">System Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright">
+                        &copy; <span th:text="${currentYear ?: '2025'}">2025</span> 
+                        BTHL-HealthCare Platform. Created by 
+                        <a href="https://www.davidstj.com" target="_blank" rel="noopener">David St John</a>.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-social">
+                        <span class="environment-indicator" th:if="${environment}" 
+                              th:text="${environment}" 
+                              th:classappend="${environment == 'production'} ? 'prod' : 'dev'">DEV</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- I include Bootstrap JavaScript for component functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" 
+            integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- I include my custom JavaScript for enhanced functionality -->
+    <script th:src="@{/js/main.js}"></script>
+    
+    <!-- I add page-specific JavaScript if provided -->
+    <th:block th:if="${additionalJS}">
+        <script th:each="js : ${additionalJS}" th:src="@{${js}}"></script>
+    </th:block>
+
+    <!-- I implement additional JavaScript for enhanced UX -->
+    <script layout:fragment="scripts">
+        // Page-specific scripts will be inserted here
+    </script>
+
+</body>
+</html>
