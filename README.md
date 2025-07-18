@@ -13,6 +13,16 @@ BTHL-HealthCare is a comprehensive enterprise healthcare management platform des
 
 I created this platform to simplify healthcare benefit management by providing a unified interface for companies to discover, compare, and manage their employee healthcare benefits while ensuring compliance with healthcare regulations and optimizing cost-effectiveness.
 
+### 🌌 Beyond The Horizon Labs Context
+
+This healthcare platform represents more than just another business application - it embodies the core mission of **[Beyond The Horizon Labs (BTHL)](ABOUT-BTHL.md)** to create technology that serves human sovereignty rather than institutional exploitation. 
+
+BTHL was founded on the principle that technology should empower rather than control, clarify rather than confuse, and serve authentic human needs rather than extractive business models. In the healthcare industry, where complexity often serves to obscure rather than illuminate, our platform stands as a direct challenge to systems designed to benefit institutions at the expense of the people they're meant to serve.
+
+Our approach integrates neurodivergent-informed design principles, trauma-aware user experience patterns, and a deep commitment to transparency and user agency. This isn't just about managing insurance plans - it's about creating healthcare technology that honors the complexity and dignity of human experience.
+
+**[Learn more about BTHL's vision and mission →](ABOUT-BTHL.md)**
+
 ### ✨ Key Features
 
 **For Companies:**
@@ -102,9 +112,9 @@ node --version
 ### System Requirements
 - **Memory**: Minimum 4GB RAM (8GB recommended for development)
 - **Storage**: 10GB free disk space
-- **Operating System**:
-    - Development: macOS 10.15+, Ubuntu 22.04+, Windows 10+
-    - Production: Ubuntu 22.04 LTS, Debian 12, RHEL 8+
+- **Operating System**: 
+  - Development: macOS 10.15+, Ubuntu 22.04+, Windows 10+
+  - Production: Ubuntu 22.04 LTS, Debian 12, RHEL 8+
 
 ## 🚀 Quick Start Guide
 
