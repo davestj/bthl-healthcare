@@ -1,16 +1,17 @@
 /**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java
+ * File: /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java
  * Author: davestj (David St John)
- * Date: 2025-07-16
+ * Date: 2025-07-18
  * Purpose: Authentication REST API controller for login, registration, and authentication operations
  * Description: I designed this controller to handle all authentication-related API endpoints including
  *              user registration, login, password reset, email verification, and token management.
  *              I've implemented comprehensive security measures and proper error handling.
  * 
  * Changelog:
+ * 2025-07-18: Separated embedded DTO classes into individual files to resolve Java compilation errors
  * 2025-07-16: Initial creation of AuthController with comprehensive authentication API endpoints
  * 
- * Git Commit: git commit -m "feat: add AuthController with comprehensive authentication API endpoints"
+ * Git Commit: git commit -m "refactor: clean AuthController by removing embedded DTO classes to resolve compilation errors"
  * 
  * Next Dev Feature: Add OAuth2 integration endpoints and advanced security monitoring
  * TODO: Implement rate limiting and advanced threat detection for authentication endpoints
@@ -35,7 +36,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,11 +53,11 @@ import java.util.UUID;
 @CrossOrigin(origins = {"https://davestj.com", "https://*.davestj.com", "http://localhost:*"})
 public class AuthController {
 
-    public static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    public final AuthenticationManager authenticationManager;
-    public final UserService userService;
-    public final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * I create this constructor to inject all required dependencies for authentication operations.
@@ -79,7 +79,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegistrationDto registrationDto) {
         logger.info("Registration attempt for username: {}", registrationDto.getUsername());
-
         try {
             // I validate password confirmation if provided
             if (registrationDto.getPassword() != null && !registrationDto.getPassword().equals(registrationDto.getPassword())) {
@@ -88,7 +87,6 @@ public class AuthController {
             }
 
             User user = userService.registerUser(registrationDto);
-
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "User registered successfully. Please check your email for verification.");
@@ -103,12 +101,10 @@ public class AuthController {
             logger.warn("Registration failed - user already exists: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(createErrorResponse("User already exists: " + e.getMessage()));
-
         } catch (IllegalArgumentException e) {
             logger.warn("Registration failed - invalid data: {}", e.getMessage());
             return ResponseEntity.badRequest()
                 .body(createErrorResponse("Invalid registration data: " + e.getMessage()));
-
         } catch (Exception e) {
             logger.error("Registration failed - unexpected error", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -125,7 +121,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequest) {
         logger.info("Login attempt for identifier: {}", loginRequest.getUsernameOrEmail());
-
         try {
             // I authenticate the user credentials
             Authentication authentication = authenticationManager.authenticate(
@@ -160,12 +155,10 @@ public class AuthController {
             logger.warn("Login failed - account locked: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.LOCKED)
                 .body(createErrorResponse("Account is locked: " + e.getMessage()));
-
         } catch (AuthenticationException e) {
             logger.warn("Login failed - invalid credentials for: {}", loginRequest.getUsernameOrEmail());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(createErrorResponse("Invalid username/email or password"));
-
         } catch (Exception e) {
             logger.error("Login failed - unexpected error", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -182,17 +175,14 @@ public class AuthController {
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshTokenRequestDto refreshRequest) {
         logger.debug("Token refresh attempt");
-
         try {
             String refreshToken = refreshRequest.getRefreshToken();
-
             if (!jwtTokenProvider.validateToken(refreshToken)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(createErrorResponse("Invalid or expired refresh token"));
             }
 
             String newAccessToken = jwtTokenProvider.refreshToken(refreshToken);
-
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("accessToken", newAccessToken);
@@ -218,14 +208,11 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public ResponseEntity<?> initiatePasswordReset(@Valid @RequestBody PasswordResetRequestDto resetRequest) {
         logger.info("Password reset requested for email: {}", resetRequest.getEmail());
-
         try {
             userService.initiatePasswordReset(resetRequest.getEmail());
-
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "If the email exists, a password reset link has been sent.");
-
             // I always return success to prevent email enumeration
             return ResponseEntity.ok(response);
 
@@ -248,26 +235,21 @@ public class AuthController {
     @PostMapping("/reset-password")
     public ResponseEntity<?> completePasswordReset(@Valid @RequestBody PasswordResetCompleteDto resetRequest) {
         logger.info("Password reset completion attempt");
-
         try {
             userService.completePasswordReset(resetRequest.getToken(), resetRequest.getNewPassword());
-
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "Password has been reset successfully. You can now log in with your new password.");
-
             return ResponseEntity.ok(response);
 
         } catch (InvalidTokenException e) {
             logger.warn("Password reset failed - invalid token: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(createErrorResponse("Invalid or expired reset token"));
-
         } catch (IllegalArgumentException e) {
             logger.warn("Password reset failed - invalid password: {}", e.getMessage());
             return ResponseEntity.badRequest()
                 .body(createErrorResponse("Invalid password: " + e.getMessage()));
-
         } catch (Exception e) {
             logger.error("Password reset completion failed", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -284,7 +266,6 @@ public class AuthController {
     @PostMapping("/verify-email")
     public ResponseEntity<?> verifyEmail(@RequestParam String token) {
         logger.info("Email verification attempt");
-
         try {
             // I find user by verification token and verify email
             // This would need to be implemented in UserService
@@ -293,14 +274,12 @@ public class AuthController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "Email verified successfully. Your account is now active.");
-
             return ResponseEntity.ok(response);
 
         } catch (InvalidTokenException e) {
             logger.warn("Email verification failed - invalid token: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(createErrorResponse("Invalid or expired verification token"));
-
         } catch (Exception e) {
             logger.error("Email verification failed", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -316,15 +295,12 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
         logger.debug("User logout request");
-
         try {
             // I clear the security context
             SecurityContextHolder.clearContext();
-
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "Logged out successfully");
-
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
@@ -343,7 +319,6 @@ public class AuthController {
     @PostMapping("/enable-mfa")
     public ResponseEntity<?> enableMfa(@Valid @RequestBody EnableMfaRequestDto mfaRequest) {
         logger.info("MFA enablement request for user");
-
         try {
             // I get the current authenticated user
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -355,7 +330,6 @@ public class AuthController {
             response.put("success", true);
             response.put("message", "MFA enabled successfully");
             response.put("backupCodes", backupCodes);
-
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
@@ -373,7 +347,6 @@ public class AuthController {
     @PostMapping("/disable-mfa")
     public ResponseEntity<?> disableMfa() {
         logger.info("MFA disablement request");
-
         try {
             // I get the current authenticated user
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -384,7 +357,6 @@ public class AuthController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "MFA disabled successfully");
-
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
@@ -399,7 +371,7 @@ public class AuthController {
     /**
      * I create standardized error responses for consistent API error handling.
      */
-    public Map<String, Object> createErrorResponse(String message) {
+    private Map<String, Object> createErrorResponse(String message) {
         Map<String, Object> error = new HashMap<>();
         error.put("success", false);
         error.put("error", message);
@@ -410,7 +382,7 @@ public class AuthController {
     /**
      * I create user response objects with safe user information for API responses.
      */
-    public Map<String, Object> createUserResponse(User user) {
+    private Map<String, Object> createUserResponse(User user) {
         Map<String, Object> userResponse = new HashMap<>();
         userResponse.put("id", user.getId());
         userResponse.put("username", user.getUsername());
@@ -427,66 +399,4 @@ public class AuthController {
         userResponse.put("createdAt", user.getCreatedAt());
         return userResponse;
     }
-}
-
-/**
- * Additional DTO classes for the AuthController
- */
-
-package com.bthl.healthcare.dto;
-
-import jakarta.validation.constraints.NotBlank;
-
-public class LoginRequestDto {
-    @NotBlank(message = "Username or email is required")
-    public String usernameOrEmail;
-    
-    @NotBlank(message = "Password is required")
-    public String password;
-    
-    public String getUsernameOrEmail() { return usernameOrEmail; }
-    public void setUsernameOrEmail(String usernameOrEmail) { this.usernameOrEmail = usernameOrEmail; }
-    
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-}
-
-public class RefreshTokenRequestDto {
-    @NotBlank(message = "Refresh token is required")
-    public String refreshToken;
-    
-    public String getRefreshToken() { return refreshToken; }
-    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
-}
-
-public class PasswordResetRequestDto {
-    @NotBlank(message = "Email is required")
-    @jakarta.validation.constraints.Email(message = "Email must be valid")
-    public String email;
-    
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-}
-
-public class PasswordResetCompleteDto {
-    @NotBlank(message = "Token is required")
-    public String token;
-    
-    @NotBlank(message = "New password is required")
-    @jakarta.validation.constraints.Size(min = 12, message = "Password must be at least 12 characters")
-    public String newPassword;
-    
-    public String getToken() { return token; }
-    public void setToken(String token) { this.token = token; }
-    
-    public String getNewPassword() { return newPassword; }
-    public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
-}
-
-public class EnableMfaRequestDto {
-    @NotBlank(message = "TOTP secret is required")
-    public String totpSecret;
-    
-    public String getTotpSecret() { return totpSecret; }
-    public void setTotpSecret(String totpSecret) { this.totpSecret = totpSecret; }
 }

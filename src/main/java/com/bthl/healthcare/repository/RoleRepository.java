@@ -1,15 +1,18 @@
 /**
  * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/RoleRepository.java
  * Author: davestj (David St John)
- * Date: 2025-07-16
+ * Date: 2025-07-17
  * Purpose: Role repository interface for role-based access control data operations
  * Description: I designed this repository to provide comprehensive data access for role management
  *              including role hierarchy, permission management, and user assignment operations.
+ *              I corrected this file to contain only the RoleRepository interface following
+ *              Java's one-class-per-file organizational principle.
  * 
  * Changelog:
  * 2025-07-16: Initial creation of RoleRepository with comprehensive role data access methods
+ * 2025-07-17: Fixed file structure to contain only RoleRepository interface
  * 
- * Git Commit: git commit -m "feat: add RoleRepository interface for RBAC data operations"
+ * Git Commit: git commit -m "fix: separate RoleRepository into individual file following Java conventions"
  * 
  * Next Dev Feature: Add role hierarchy queries and permission inheritance methods
  * TODO: Implement role template and bulk assignment capabilities
@@ -31,33 +34,58 @@ import java.util.UUID;
 
 /**
  * I created this RoleRepository interface to handle all database operations
- * related to role management and RBAC functionality.
+ * related to role management and RBAC functionality. This interface extends
+ * JpaRepository to provide standard CRUD operations plus custom query methods
+ * for role-specific business logic.
  */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, UUID> {
 
     /**
      * I find a role by its unique name for role assignment operations.
+     * This method is essential for looking up roles during user registration
+     * and permission checking processes.
+     * 
+     * @param name the role name to search for
+     * @return Optional containing the role if found, empty otherwise
      */
     Optional<Role> findByName(String name);
 
     /**
      * I check if a role name already exists to prevent duplicates.
+     * This validation method ensures role name uniqueness across the system.
+     * 
+     * @param name the role name to check
+     * @return true if a role with this name exists, false otherwise
      */
     boolean existsByName(String name);
 
     /**
      * I find all system roles for administrative purposes.
+     * System roles are predefined roles that cannot be deleted or modified
+     * by regular administrators, ensuring system security and stability.
+     * 
+     * @return List of all system roles
      */
     List<Role> findByIsSystemRoleTrue();
 
     /**
      * I find all custom (non-system) roles for management.
+     * These are user-created roles that can be modified or deleted
+     * as needed for organizational requirements.
+     * 
+     * @return List of all custom roles
      */
     List<Role> findByIsSystemRoleFalse();
 
     /**
-     * I search roles by name for administrative filtering.
+     * I search roles by name or description for administrative filtering.
+     * This method provides flexible search capability for role management
+     * interfaces, allowing administrators to quickly find specific roles.
+     * 
+     * @param searchTerm the term to search for in role names and descriptions
+     * @param pageable pagination information
+     * @return Page of roles matching the search criteria
      */
     @Query("SELECT r FROM Role r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
            "LOWER(r.description) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
@@ -65,279 +93,32 @@ public interface RoleRepository extends JpaRepository<Role, UUID> {
 
     /**
      * I find roles that contain a specific permission.
+     * This method is crucial for permission auditing and security analysis,
+     * allowing administrators to see which roles grant specific permissions.
+     * 
+     * @param permission the permission to search for
+     * @return List of roles that include the specified permission
      */
     @Query("SELECT r FROM Role r WHERE :permission MEMBER OF r.permissions")
     List<Role> findByPermission(@Param("permission") String permission);
 
     /**
      * I count the number of users assigned to each role.
+     * This statistical method provides valuable insights for role management
+     * and helps administrators understand role usage patterns.
+     * 
+     * @return List of Object arrays containing role ID, name, and user count
      */
     @Query("SELECT r.id, r.name, COUNT(u) FROM Role r LEFT JOIN r.users u GROUP BY r.id, r.name")
     List<Object[]> getRoleUserCounts();
 
     /**
      * I find roles that can be safely deleted (no users assigned).
+     * This method helps administrators identify unused custom roles
+     * that can be cleaned up without affecting any users.
+     * 
+     * @return List of deletable roles (custom roles with no assigned users)
      */
     @Query("SELECT r FROM Role r WHERE r.isSystemRole = false AND SIZE(r.users) = 0")
     List<Role> findDeletableRoles();
-}
-
-/**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/CompanyRepository.java
- * Author: davestj (David St John)
- * Date: 2025-07-16
- * Purpose: Company repository interface for company management data operations
- */
-
-package com.bthl.healthcare.repository;
-
-import com.bthl.healthcare.model.Company;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public interface CompanyRepository extends JpaRepository<Company, UUID> {
-
-    Optional<Company> findByName(String name);
-    Optional<Company> findByTaxId(String taxId);
-    boolean existsByName(String name);
-    boolean existsByTaxId(String taxId);
-
-    Page<Company> findByStatus(String status, Pageable pageable);
-    Page<Company> findByIndustry(String industry, Pageable pageable);
-
-    @Query("SELECT c FROM Company c WHERE c.employeeCount BETWEEN :minEmployees AND :maxEmployees")
-    Page<Company> findByEmployeeCountRange(@Param("minEmployees") Integer minEmployees, 
-                                          @Param("maxEmployees") Integer maxEmployees, 
-                                          Pageable pageable);
-
-    @Query("SELECT c FROM Company c WHERE " +
-           "LOWER(c.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(c.legalName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "c.taxId LIKE CONCAT('%', :searchTerm, '%')")
-    Page<Company> searchCompanies(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-    List<Company> findTop10ByOrderByEmployeeCountDesc();
-    
-    @Query("SELECT COUNT(c) FROM Company c WHERE c.status = :status")
-    long countByStatus(@Param("status") String status);
-}
-
-/**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/InsuranceProviderRepository.java
- * Author: davestj (David St John)
- * Date: 2025-07-16
- * Purpose: Insurance Provider repository interface for provider data operations
- */
-
-package com.bthl.healthcare.repository;
-
-import com.bthl.healthcare.model.InsuranceProvider;
-import com.bthl.healthcare.model.enums.ProviderType;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public interface InsuranceProviderRepository extends JpaRepository<InsuranceProvider, UUID> {
-
-    Optional<InsuranceProvider> findByProviderCode(String providerCode);
-    boolean existsByProviderCode(String providerCode);
-    boolean existsByName(String name);
-
-    List<InsuranceProvider> findByProviderType(ProviderType providerType);
-    Page<InsuranceProvider> findByProviderType(ProviderType providerType, Pageable pageable);
-    Page<InsuranceProvider> findByIsActiveTrue(Pageable pageable);
-
-    @Query("SELECT p FROM InsuranceProvider p WHERE " +
-           "LOWER(p.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(p.legalName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(p.providerCode) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
-    Page<InsuranceProvider> searchProviders(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-    @Query("SELECT p FROM InsuranceProvider p WHERE :serviceArea MEMBER OF p.serviceAreas")
-    List<InsuranceProvider> findByServiceArea(@Param("serviceArea") String serviceArea);
-
-    List<InsuranceProvider> findTop10ByOrderByNetworkSizeDesc();
-    
-    long countByProviderType(ProviderType providerType);
-    long countByIsActiveTrue();
-}
-
-/**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/InsuranceBrokerRepository.java
- * Author: davestj (David St John)
- * Date: 2025-07-16
- * Purpose: Insurance Broker repository interface for broker data operations
- */
-
-package com.bthl.healthcare.repository;
-
-import com.bthl.healthcare.model.InsuranceBroker;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public interface InsuranceBrokerRepository extends JpaRepository<InsuranceBroker, UUID> {
-
-    Optional<InsuranceBroker> findByUserId(UUID userId);
-    Optional<InsuranceBroker> findByLicenseNumber(String licenseNumber);
-    boolean existsByLicenseNumber(String licenseNumber);
-
-    List<InsuranceBroker> findByLicenseState(String licenseState);
-    Page<InsuranceBroker> findByIsActiveTrue(Pageable pageable);
-
-    @Query("SELECT b FROM InsuranceBroker b WHERE b.licenseExpires BETWEEN :startDate AND :endDate")
-    List<InsuranceBroker> findByLicenseExpiringBetween(@Param("startDate") LocalDate startDate, 
-                                                       @Param("endDate") LocalDate endDate);
-
-    @Query("SELECT b FROM InsuranceBroker b WHERE :territory MEMBER OF b.territories")
-    List<InsuranceBroker> findByTerritory(@Param("territory") String territory);
-
-    @Query("SELECT b FROM InsuranceBroker b WHERE :specialization MEMBER OF b.specializations")
-    List<InsuranceBroker> findBySpecialization(@Param("specialization") String specialization);
-
-    @Query("SELECT b FROM InsuranceBroker b WHERE " +
-           "LOWER(b.user.firstName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(b.user.lastName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(b.agencyName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "b.licenseNumber LIKE CONCAT('%', :searchTerm, '%')")
-    Page<InsuranceBroker> searchBrokers(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-    long countByIsActiveTrue();
-    long countByLicenseState(String licenseState);
-}
-
-/**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/InsurancePlanRepository.java
- * Author: davestj (David St John)
- * Date: 2025-07-16
- * Purpose: Insurance Plan repository interface for plan data operations
- */
-
-package com.bthl.healthcare.repository;
-
-import com.bthl.healthcare.model.InsurancePlan;
-import com.bthl.healthcare.model.enums.ProviderType;
-import com.bthl.healthcare.model.enums.PlanTier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public interface InsurancePlanRepository extends JpaRepository<InsurancePlan, UUID> {
-
-    Optional<InsurancePlan> findByPlanCode(String planCode);
-    boolean existsByPlanCode(String planCode);
-
-    List<InsurancePlan> findByProviderId(UUID providerId);
-    Page<InsurancePlan> findByProviderId(UUID providerId, Pageable pageable);
-    
-    List<InsurancePlan> findByPlanType(ProviderType planType);
-    Page<InsurancePlan> findByPlanType(ProviderType planType, Pageable pageable);
-    
-    List<InsurancePlan> findByTier(PlanTier tier);
-    Page<InsurancePlan> findByTier(PlanTier tier, Pageable pageable);
-    
-    Page<InsurancePlan> findByIsActiveTrue(Pageable pageable);
-    Page<InsurancePlan> findByPlanTypeAndIsActiveTrue(ProviderType planType, Pageable pageable);
-
-    @Query("SELECT p FROM InsurancePlan p WHERE " +
-           "LOWER(p.planName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(p.planCode) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(p.provider.name) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
-    Page<InsurancePlan> searchPlans(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-    @Query("SELECT p FROM InsurancePlan p WHERE p.deductible BETWEEN :minDeductible AND :maxDeductible")
-    List<InsurancePlan> findByDeductibleRange(@Param("minDeductible") BigDecimal minDeductible,
-                                             @Param("maxDeductible") BigDecimal maxDeductible);
-
-    @Query("SELECT p FROM InsurancePlan p WHERE :coverage MEMBER OF p.geographicCoverage")
-    List<InsurancePlan> findByGeographicCoverage(@Param("coverage") String coverage);
-
-    long countByPlanType(ProviderType planType);
-    long countByTier(PlanTier tier);
-    long countByIsActiveTrue();
-}
-
-/**
- * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/repository/CompanyHealthcarePortfolioRepository.java
- * Author: davestj (David St John)
- * Date: 2025-07-16
- * Purpose: Company Healthcare Portfolio repository interface for portfolio data operations
- */
-
-package com.bthl.healthcare.repository;
-
-import com.bthl.healthcare.model.CompanyHealthcarePortfolio;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
-
-@Repository
-public interface CompanyHealthcarePortfolioRepository extends JpaRepository<CompanyHealthcarePortfolio, UUID> {
-
-    List<CompanyHealthcarePortfolio> findByCompanyId(UUID companyId);
-    Page<CompanyHealthcarePortfolio> findByCompanyId(UUID companyId, Pageable pageable);
-    
-    List<CompanyHealthcarePortfolio> findByBrokerId(UUID brokerId);
-    Page<CompanyHealthcarePortfolio> findByBrokerId(UUID brokerId, Pageable pageable);
-    
-    List<CompanyHealthcarePortfolio> findByPolicyYear(Integer policyYear);
-    Page<CompanyHealthcarePortfolio> findByStatus(String status, Pageable pageable);
-
-    @Query("SELECT p FROM CompanyHealthcarePortfolio p WHERE p.renewalDate BETWEEN :startDate AND :endDate")
-    List<CompanyHealthcarePortfolio> findByRenewalDateBetween(@Param("startDate") LocalDate startDate,
-                                                             @Param("endDate") LocalDate endDate);
-
-    @Query("SELECT p FROM CompanyHealthcarePortfolio p WHERE " +
-           "LOWER(p.portfolioName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(p.company.name) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
-    Page<CompanyHealthcarePortfolio> searchPortfolios(@Param("searchTerm") String searchTerm, Pageable pageable);
-
-    @Query("SELECT COALESCE(SUM(p.totalPremium), 0) FROM CompanyHealthcarePortfolio p WHERE p.status = 'ACTIVE'")
-    java.math.BigDecimal getTotalActivePremium();
-
-    long countByStatus(String status);
-    long countByPolicyYear(Integer policyYear);
 }
