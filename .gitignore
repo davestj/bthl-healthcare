@@ -1,0 +1,153 @@
+# BTHL-HealthCare .gitignore
+# File: /Users/dstjohn/dev/02_davestj.com/bthl-hc/.gitignore
+# Author: davestj (David St John)
+# Date: 2025-07-18
+# Purpose: Git ignore rules for BTHL-HealthCare Spring Boot application
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+*.aar
+
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+### Spring Boot ###
+BOOT-INF/
+META-INF/
+
+### IDE - IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### IDE - Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+### IDE - VS Code ###
+.vscode/
+*.code-workspace
+.history/
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+### Windows ###
+Thumbs.db
+*.tmp
+*.temp
+*.swp
+Desktop.ini
+$RECYCLE.BIN/
+
+### Application Logs ###
+logs/
+*.log
+log/
+*.log.*
+*.out
+
+### Application Configuration ###
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+application-*.properties
+application-*.yml
+!application.yml
+!application-dev.yml.example
+
+### Database ###
+*.h2.db
+*.trace.db
+*.lock.db
+*.mv.db
+*.sqlite
+*.sqlite3
+*.db
+*.sql.backup
+*.dump
+
+### Security & Credentials ###
+*.pem
+*.key
+*.crt
+*.jks
+*.p12
+*.pfx
+ssl/
+certificates/
+secrets.yml
+credentials.yml
+*.credentials
+.secrets
+
+### Testing ###
+*.exec
+.sonar/
+sonar-project.properties
+
+### Node.js ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.npm
+.eslintcache
+
+### Backup Files ###
+*.backup
+*.bak
+*.orig
+*~
+
+### Healthcare Specific ###
+patient-data/
+phi/
+medical-records/
+*.phi
+*.patient
+*.medical
+
+### BTHL Project Specific ###
+*.debug
+compile_output.txt
+debug_session.log
+scratch/
+uploads/
+user-uploads/
+temp-uploads/
