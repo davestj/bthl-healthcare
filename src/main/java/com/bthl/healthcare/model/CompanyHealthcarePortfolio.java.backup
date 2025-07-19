@@ -30,7 +30,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -506,5 +506,253 @@ public class CompanyHealthcarePortfolio {
                ", planCount=" + getPlanCount() +
                ", createdAt=" + createdAt +
                '}';
+    }
+}
+
+/**
+ * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/PortfolioPlan.java
+ * Author: davestj (David St John)
+ * Date: 2025-07-16
+ * Purpose: Portfolio Plan junction entity for many-to-many relationship between portfolios and plans
+ * Description: I designed this entity to represent the relationship between a company's healthcare
+ *              portfolio and specific insurance plans, including enrollment numbers and pricing.
+ */
+
+@Entity
+@Table(name = "portfolio_plans", indexes = {
+    @Index(name = "idx_portfolio_plans_portfolio", columnList = "portfolio_id"),
+    @Index(name = "idx_portfolio_plans_plan", columnList = "plan_id")
+}, uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"portfolio_id", "plan_id"})
+})
+@EntityListeners(AuditingEntityListener.class)
+public class PortfolioPlan {
+
+    @Id
+    @UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
+    public UUID id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "portfolio_id", nullable = false)
+    public CompanyHealthcarePortfolio portfolio;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "plan_id", nullable = false)
+    public InsurancePlan plan;
+
+    @DecimalMin(value = "0.00", message = "Employee premium must be non-negative")
+    @DecimalMax(value = "99999.99", message = "Employee premium must not exceed $99,999.99")
+    @Column(name = "employee_premium", precision = 10, scale = 2)
+    public BigDecimal employeePremium;
+
+    @DecimalMin(value = "0.00", message = "Family premium must be non-negative")
+    @DecimalMax(value = "99999.99", message = "Family premium must not exceed $99,999.99")
+    @Column(name = "family_premium", precision = 10, scale = 2)
+    public BigDecimal familyPremium;
+
+    @Min(value = 0, message = "Employees enrolled must be non-negative")
+    @Column(name = "employees_enrolled")
+    public Integer employeesEnrolled = 0;
+
+    @Min(value = 0, message = "Dependents enrolled must be non-negative")
+    @Column(name = "dependents_enrolled")
+    public Integer dependentsEnrolled = 0;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    public LocalDateTime createdAt;
+
+    // I implement default constructor for JPA
+    public PortfolioPlan() {}
+
+    // I create constructor for portfolio plan creation
+    public PortfolioPlan(CompanyHealthcarePortfolio portfolio, InsurancePlan plan,
+                        BigDecimal employeePremium, BigDecimal familyPremium) {
+        this.portfolio = portfolio;
+        this.plan = plan;
+        this.employeePremium = employeePremium;
+        this.familyPremium = familyPremium;
+        this.employeesEnrolled = 0;
+        this.dependentsEnrolled = 0;
+    }
+
+    // I implement getter and setter methods
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+    
+    public CompanyHealthcarePortfolio getPortfolio() { return portfolio; }
+    public void setPortfolio(CompanyHealthcarePortfolio portfolio) { this.portfolio = portfolio; }
+    
+    public InsurancePlan getPlan() { return plan; }
+    public void setPlan(InsurancePlan plan) { this.plan = plan; }
+    
+    public BigDecimal getEmployeePremium() { return employeePremium; }
+    public void setEmployeePremium(BigDecimal employeePremium) { this.employeePremium = employeePremium; }
+    
+    public BigDecimal getFamilyPremium() { return familyPremium; }
+    public void setFamilyPremium(BigDecimal familyPremium) { this.familyPremium = familyPremium; }
+    
+    public Integer getEmployeesEnrolled() { return employeesEnrolled; }
+    public void setEmployeesEnrolled(Integer employeesEnrolled) { this.employeesEnrolled = employeesEnrolled; }
+    
+    public Integer getDependentsEnrolled() { return dependentsEnrolled; }
+    public void setDependentsEnrolled(Integer dependentsEnrolled) { this.dependentsEnrolled = dependentsEnrolled; }
+    
+    public LocalDateTime getCreatedAt() { return createdAt; }
+
+    @JsonProperty("totalEnrolled")
+    public Integer getTotalEnrolled() {
+        int employees = employeesEnrolled != null ? employeesEnrolled : 0;
+        int dependents = dependentsEnrolled != null ? dependentsEnrolled : 0;
+        return employees + dependents;
+    }
+
+    @JsonProperty("totalPremiumCost")
+    public BigDecimal getTotalPremiumCost() {
+        BigDecimal empCost = employeePremium != null && employeesEnrolled != null ? 
+            employeePremium.multiply(new BigDecimal(employeesEnrolled)) : BigDecimal.ZERO;
+        BigDecimal famCost = familyPremium != null && dependentsEnrolled != null ? 
+            familyPremium.multiply(new BigDecimal(dependentsEnrolled)) : BigDecimal.ZERO;
+        return empCost.add(famCost);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        PortfolioPlan that = (PortfolioPlan) obj;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
+
+/**
+ * File: /var/www/davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/BrokerProviderRelationship.java
+ * Author: davestj (David St John)
+ * Date: 2025-07-16
+ * Purpose: Broker Provider Relationship entity for managing broker-provider partnerships
+ * Description: I designed this entity to track the relationships between insurance brokers
+ *              and insurance providers, including contract terms and commission structures.
+ */
+
+@Entity
+@Table(name = "broker_provider_relationships", indexes = {
+    @Index(name = "idx_broker_provider_broker", columnList = "broker_id"),
+    @Index(name = "idx_broker_provider_provider", columnList = "provider_id"),
+    @Index(name = "idx_broker_provider_active", columnList = "is_active")
+}, uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"broker_id", "provider_id"})
+})
+@EntityListeners(AuditingEntityListener.class)
+public class BrokerProviderRelationship {
+
+    @Id
+    @UuidGenerator
+    @Column(name = "id", updatable = false, nullable = false)
+    public UUID id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "broker_id", nullable = false)
+    public InsuranceBroker broker;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "provider_id", nullable = false)
+    public InsuranceProvider provider;
+
+    @Pattern(regexp = "^(CONTRACTED|APPOINTED|TERMINATED|SUSPENDED)$", message = "Relationship type must be CONTRACTED, APPOINTED, TERMINATED, or SUSPENDED")
+    @Column(name = "relationship_type", length = 50)
+    public String relationshipType = "CONTRACTED";
+
+    @DecimalMin(value = "0.0000", message = "Commission rate must be non-negative")
+    @DecimalMax(value = "1.0000", message = "Commission rate must not exceed 100%")
+    @Column(name = "commission_rate", precision = 5, scale = 4)
+    public BigDecimal commissionRate;
+
+    @Column(name = "contract_start_date")
+    public LocalDate contractStartDate;
+
+    @Column(name = "contract_end_date")
+    public LocalDate contractEndDate;
+
+    @Column(name = "is_active", nullable = false)
+    public Boolean isActive = true;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    public LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    public LocalDateTime updatedAt;
+
+    // I implement default constructor for JPA
+    public BrokerProviderRelationship() {}
+
+    // I create constructor for relationship creation
+    public BrokerProviderRelationship(InsuranceBroker broker, InsuranceProvider provider,
+                                    String relationshipType, BigDecimal commissionRate) {
+        this.broker = broker;
+        this.provider = provider;
+        this.relationshipType = relationshipType;
+        this.commissionRate = commissionRate;
+        this.isActive = true;
+    }
+
+    // I implement getter and setter methods
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+    
+    public InsuranceBroker getBroker() { return broker; }
+    public void setBroker(InsuranceBroker broker) { this.broker = broker; }
+    
+    public InsuranceProvider getProvider() { return provider; }
+    public void setProvider(InsuranceProvider provider) { this.provider = provider; }
+    
+    public String getRelationshipType() { return relationshipType; }
+    public void setRelationshipType(String relationshipType) { this.relationshipType = relationshipType; }
+    
+    public BigDecimal getCommissionRate() { return commissionRate; }
+    public void setCommissionRate(BigDecimal commissionRate) { this.commissionRate = commissionRate; }
+    
+    public LocalDate getContractStartDate() { return contractStartDate; }
+    public void setContractStartDate(LocalDate contractStartDate) { this.contractStartDate = contractStartDate; }
+    
+    public LocalDate getContractEndDate() { return contractEndDate; }
+    public void setContractEndDate(LocalDate contractEndDate) { this.contractEndDate = contractEndDate; }
+    
+    public Boolean getIsActive() { return isActive; }
+    public void setIsActive(Boolean isActive) { this.isActive = isActive; }
+    
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+
+    @JsonProperty("contractStatus")
+    public String getContractStatus() {
+        if (contractEndDate == null) return "Open";
+        LocalDate now = LocalDate.now();
+        if (contractEndDate.isBefore(now)) return "Expired";
+        if (contractEndDate.isBefore(now.plusDays(30))) return "Expiring Soon";
+        return "Active";
+    }
+
+    public void activate() { this.isActive = true; }
+    public void deactivate() { this.isActive = false; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        BrokerProviderRelationship that = (BrokerProviderRelationship) obj;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

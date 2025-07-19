@@ -1,0 +1,572 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.bthl:bthl-healthcare >----------------------
+[INFO] Building BTHL-HealthCare 1.1.1-alpha
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.11:prepare-agent (default) @ bthl-healthcare ---
+[INFO] argLine set to -javaagent:/Users/dstjohn/.m2/repository/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar=destfile=/Users/dstjohn/dev/02_davestj.com/bthl-hc/target/jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ bthl-healthcare ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ bthl-healthcare ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 43 source files with javac [debug release 21] to target/classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[85,17] and() in org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer.ConcurrencyControlConfigurer has been deprecated and marked for removal
+[WARNING] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[128,17] frameOptions() in org.springframework.security.config.annotation.web.configurers.HeadersConfigurer has been deprecated and marked for removal
+[WARNING] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[129,17] contentTypeOptions() in org.springframework.security.config.annotation.web.configurers.HeadersConfigurer has been deprecated and marked for removal
+[WARNING] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[129,38] and() in org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.ContentTypeOptionsConfig has been deprecated and marked for removal
+[WARNING] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[135,17] referrerPolicy(org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy) in org.springframework.security.config.annotation.web.configurers.HeadersConfigurer has been deprecated and marked for removal
+[INFO] 5 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[22,21] package com.auth0.jwt does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[23,32] package com.auth0.jwt.algorithms does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[24,32] package com.auth0.jwt.exceptions does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[25,32] package com.auth0.jwt.interfaces does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[26,32] package com.auth0.jwt.interfaces does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[58,16] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[65,23] cannot find symbol
+  symbol:   variable Algorithm
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[74,16] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[80,23] cannot find symbol
+  symbol:   variable Algorithm
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,13] cannot find symbol
+  symbol:   class JWTVerifier
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,36] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,48] cannot find symbol
+  symbol:   variable Algorithm
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[90,18] cannot find symbol
+  symbol:   class JWTVerificationException
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[97,9] cannot find symbol
+  symbol:   class DecodedJWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[97,33] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[102,9] cannot find symbol
+  symbol:   class DecodedJWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[102,33] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[107,9] cannot find symbol
+  symbol:   class DecodedJWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[107,33] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[120,16] cannot find symbol
+  symbol:   variable JWT
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[125,23] cannot find symbol
+  symbol:   variable Algorithm
+  location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[392,42] cannot find symbol
+  symbol:   method getFullName()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[395,44] cannot find symbol
+  symbol:   method getMfaEnabled()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[396,47] cannot find symbol
+  symbol:   method getEmailVerified()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[397,49] cannot find symbol
+  symbol:   method getProfileImageUrl()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[398,43] cannot find symbol
+  symbol:   method getLastLogin()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[125,13] cannot find symbol
+  symbol:   method setPhone(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[129,13] cannot find symbol
+  symbol:   method setEmailVerified(boolean)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[130,13] cannot find symbol
+  symbol:   method setMfaEnabled(boolean)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[131,13] cannot find symbol
+  symbol:   method setFailedLoginAttempts(int)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[135,13] cannot find symbol
+  symbol:   method setEmailVerificationToken(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] method logUserCreation in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
+  required: java.util.UUID,java.lang.String
+  found:    com.bthl.healthcare.model.User
+  reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[142,21] cannot find symbol
+  symbol:   method sendEmailVerificationAsync(java.lang.String,java.lang.String)
+  location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[162,13] cannot find symbol
+  symbol:   method setCreatedBy(java.util.UUID)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[165,20] cannot find symbol
+  symbol:   method isAutoVerify()
+  location: variable userDto of type com.bthl.healthcare.dto.UserRegistrationDto
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[166,17] cannot find symbol
+  symbol:   method verifyEmail()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[167,17] cannot find symbol
+  symbol:   method activate()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[171,21] cannot find symbol
+  symbol:   method logUserCreationByAdmin(com.bthl.healthcare.model.User,java.util.UUID)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[195,17] cannot find symbol
+  symbol:   method getAccountLockedUntil()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[196,46] cannot find symbol
+  symbol:   method getAccountLockedUntil()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[197,25] cannot find symbol
+  symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[198,80] cannot find symbol
+  symbol:   method getAccountLockedUntil()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[204,25] cannot find symbol
+  symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[210,25] cannot find symbol
+  symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[216,21] cannot find symbol
+  symbol:   method logSuccessfulLogin(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[228,13] cannot find symbol
+  symbol:   method incrementFailedLoginAttempts()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[230,17] cannot find symbol
+  symbol:   method getFailedLoginAttempts()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[231,17] cannot find symbol
+  symbol:   method lockAccount(int)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[233,48] cannot find symbol
+  symbol:   method getFailedLoginAttempts()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[236,25] cannot find symbol
+  symbol:   method sendAccountLockoutNotificationAsync(java.lang.String,int)
+  location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[248,13] cannot find symbol
+  symbol:   method updateLastLogin()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[268,25] cannot find symbol
+  symbol:   method logPasswordChangeAttempt(com.bthl.healthcare.model.User,boolean,java.lang.String)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[277,13] cannot find symbol
+  symbol:   method clearPasswordResetToken()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] method logPasswordChange in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
+  required: java.util.UUID,java.lang.String
+  found:    com.bthl.healthcare.model.User
+  reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[283,21] cannot find symbol
+  symbol:   method sendPasswordChangeNotificationAsync(java.lang.String)
+  location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[305,13] cannot find symbol
+  symbol:   method setPasswordResetToken(java.lang.String,int)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[308,21] cannot find symbol
+  symbol:   method logPasswordResetRequest(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[311,21] cannot find symbol
+  symbol:   method sendPasswordResetEmailAsync(java.lang.String,java.lang.String)
+  location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[329,18] cannot find symbol
+  symbol:   method isPasswordResetTokenValid()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[338,13] cannot find symbol
+  symbol:   method clearPasswordResetToken()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[339,13] cannot find symbol
+  symbol:   method resetFailedLoginAttempts()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[340,13] cannot find symbol
+  symbol:   method unlockAccount()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[343,21] cannot find symbol
+  symbol:   method logPasswordReset(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[346,21] cannot find symbol
+  symbol:   method sendPasswordResetConfirmationAsync(java.lang.String)
+  location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[368,13] cannot find symbol
+  symbol:   method enableMfa(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[369,13] cannot find symbol
+  symbol:   method setBackupCodes(java.util.Set<java.lang.String>)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[372,21] cannot find symbol
+  symbol:   method logMfaEnabled(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[387,13] cannot find symbol
+  symbol:   method disableMfa()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[390,21] cannot find symbol
+  symbol:   method logMfaDisabled(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[417,17] cannot find symbol
+  symbol:   method setPhone(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[420,17] cannot find symbol
+  symbol:   method setTimezone(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[423,17] cannot find symbol
+  symbol:   method setLocale(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[426,17] cannot find symbol
+  symbol:   method setProfileImageUrl(java.lang.String)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[430,21] cannot find symbol
+  symbol:   method logUserProfileUpdate(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[446,13] cannot find symbol
+  symbol:   method activate()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[447,13] cannot find symbol
+  symbol:   method setUpdatedBy(java.util.UUID)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[450,21] cannot find symbol
+  symbol:   method logUserActivation(com.bthl.healthcare.model.User,java.util.UUID)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[465,13] cannot find symbol
+  symbol:   method deactivate()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[466,13] cannot find symbol
+  symbol:   method setUpdatedBy(java.util.UUID)
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[469,21] cannot find symbol
+  symbol:   method logUserDeactivation(com.bthl.healthcare.model.User,java.util.UUID)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[644,21] cannot find symbol
+  symbol:   method getAccountLockedUntil()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[646,29] cannot find symbol
+  symbol:   method logAccountUnlock(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[356,58] package java.time.ChronoUnit does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[423,26] portfolio has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[431,26] portfolio has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[444,31] employeesEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[444,62] employeesEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[448,31] dependentsEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[448,63] dependentsEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[318,35] cannot find symbol
+  symbol:   method getFullName()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[348,61] package java.time.ChronoUnit does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[361,31] isActive has private access in com.bthl.healthcare.model.BrokerProviderRelationship
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[566,48] cannot find symbol
+  symbol:   method getDisplayName()
+  location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceProvider.java:[395,98] isActive has private access in com.bthl.healthcare.model.BrokerProviderRelationship
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[132,21] cannot find symbol
+  symbol:   method includeSubdomains(boolean)
+  location: class org.springframework.security.config.annotation.web.configurers.HeadersConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.HstsConfig
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[136,17] cannot find symbol
+  symbol:   method permissionsPolicy((permissio[...]usb"))
+  location: class org.springframework.security.config.annotation.web.configurers.HeadersConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.ReferrerPolicyConfig
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/WebController.java:[328,58] displayName has private access in com.bthl.healthcare.model.enums.UserType
+[INFO] 97 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.974 s
+[INFO] Finished at: 2025-07-18T20:35:26-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project bthl-healthcare: Compilation failure: Compilation failure: 
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[22,21] package com.auth0.jwt does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[23,32] package com.auth0.jwt.algorithms does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[24,32] package com.auth0.jwt.exceptions does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[25,32] package com.auth0.jwt.interfaces does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[26,32] package com.auth0.jwt.interfaces does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[58,16] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[65,23] cannot find symbol
+[ERROR]   symbol:   variable Algorithm
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[74,16] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[80,23] cannot find symbol
+[ERROR]   symbol:   variable Algorithm
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,13] cannot find symbol
+[ERROR]   symbol:   class JWTVerifier
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,36] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[85,48] cannot find symbol
+[ERROR]   symbol:   variable Algorithm
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[90,18] cannot find symbol
+[ERROR]   symbol:   class JWTVerificationException
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[97,9] cannot find symbol
+[ERROR]   symbol:   class DecodedJWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[97,33] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[102,9] cannot find symbol
+[ERROR]   symbol:   class DecodedJWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[102,33] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[107,9] cannot find symbol
+[ERROR]   symbol:   class DecodedJWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[107,33] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[120,16] cannot find symbol
+[ERROR]   symbol:   variable JWT
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[125,23] cannot find symbol
+[ERROR]   symbol:   variable Algorithm
+[ERROR]   location: class com.bthl.healthcare.security.jwt.JwtTokenProvider
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[392,42] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[395,44] cannot find symbol
+[ERROR]   symbol:   method getMfaEnabled()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[396,47] cannot find symbol
+[ERROR]   symbol:   method getEmailVerified()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[397,49] cannot find symbol
+[ERROR]   symbol:   method getProfileImageUrl()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/AuthController.java:[398,43] cannot find symbol
+[ERROR]   symbol:   method getLastLogin()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[125,13] cannot find symbol
+[ERROR]   symbol:   method setPhone(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[129,13] cannot find symbol
+[ERROR]   symbol:   method setEmailVerified(boolean)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[130,13] cannot find symbol
+[ERROR]   symbol:   method setMfaEnabled(boolean)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[131,13] cannot find symbol
+[ERROR]   symbol:   method setFailedLoginAttempts(int)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[135,13] cannot find symbol
+[ERROR]   symbol:   method setEmailVerificationToken(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] method logUserCreation in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
+[ERROR]   required: java.util.UUID,java.lang.String
+[ERROR]   found:    com.bthl.healthcare.model.User
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[142,21] cannot find symbol
+[ERROR]   symbol:   method sendEmailVerificationAsync(java.lang.String,java.lang.String)
+[ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[162,13] cannot find symbol
+[ERROR]   symbol:   method setCreatedBy(java.util.UUID)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[165,20] cannot find symbol
+[ERROR]   symbol:   method isAutoVerify()
+[ERROR]   location: variable userDto of type com.bthl.healthcare.dto.UserRegistrationDto
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[166,17] cannot find symbol
+[ERROR]   symbol:   method verifyEmail()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[167,17] cannot find symbol
+[ERROR]   symbol:   method activate()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[171,21] cannot find symbol
+[ERROR]   symbol:   method logUserCreationByAdmin(com.bthl.healthcare.model.User,java.util.UUID)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[195,17] cannot find symbol
+[ERROR]   symbol:   method getAccountLockedUntil()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[196,46] cannot find symbol
+[ERROR]   symbol:   method getAccountLockedUntil()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[197,25] cannot find symbol
+[ERROR]   symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[198,80] cannot find symbol
+[ERROR]   symbol:   method getAccountLockedUntil()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[204,25] cannot find symbol
+[ERROR]   symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[210,25] cannot find symbol
+[ERROR]   symbol:   method logFailedLoginAttempt(com.bthl.healthcare.model.User,java.lang.String)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[216,21] cannot find symbol
+[ERROR]   symbol:   method logSuccessfulLogin(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[228,13] cannot find symbol
+[ERROR]   symbol:   method incrementFailedLoginAttempts()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[230,17] cannot find symbol
+[ERROR]   symbol:   method getFailedLoginAttempts()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[231,17] cannot find symbol
+[ERROR]   symbol:   method lockAccount(int)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[233,48] cannot find symbol
+[ERROR]   symbol:   method getFailedLoginAttempts()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[236,25] cannot find symbol
+[ERROR]   symbol:   method sendAccountLockoutNotificationAsync(java.lang.String,int)
+[ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[248,13] cannot find symbol
+[ERROR]   symbol:   method updateLastLogin()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[268,25] cannot find symbol
+[ERROR]   symbol:   method logPasswordChangeAttempt(com.bthl.healthcare.model.User,boolean,java.lang.String)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[277,13] cannot find symbol
+[ERROR]   symbol:   method clearPasswordResetToken()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] method logPasswordChange in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
+[ERROR]   required: java.util.UUID,java.lang.String
+[ERROR]   found:    com.bthl.healthcare.model.User
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[283,21] cannot find symbol
+[ERROR]   symbol:   method sendPasswordChangeNotificationAsync(java.lang.String)
+[ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[305,13] cannot find symbol
+[ERROR]   symbol:   method setPasswordResetToken(java.lang.String,int)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[308,21] cannot find symbol
+[ERROR]   symbol:   method logPasswordResetRequest(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[311,21] cannot find symbol
+[ERROR]   symbol:   method sendPasswordResetEmailAsync(java.lang.String,java.lang.String)
+[ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[329,18] cannot find symbol
+[ERROR]   symbol:   method isPasswordResetTokenValid()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[338,13] cannot find symbol
+[ERROR]   symbol:   method clearPasswordResetToken()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[339,13] cannot find symbol
+[ERROR]   symbol:   method resetFailedLoginAttempts()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[340,13] cannot find symbol
+[ERROR]   symbol:   method unlockAccount()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[343,21] cannot find symbol
+[ERROR]   symbol:   method logPasswordReset(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[346,21] cannot find symbol
+[ERROR]   symbol:   method sendPasswordResetConfirmationAsync(java.lang.String)
+[ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[368,13] cannot find symbol
+[ERROR]   symbol:   method enableMfa(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[369,13] cannot find symbol
+[ERROR]   symbol:   method setBackupCodes(java.util.Set<java.lang.String>)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[372,21] cannot find symbol
+[ERROR]   symbol:   method logMfaEnabled(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[387,13] cannot find symbol
+[ERROR]   symbol:   method disableMfa()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[390,21] cannot find symbol
+[ERROR]   symbol:   method logMfaDisabled(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[417,17] cannot find symbol
+[ERROR]   symbol:   method setPhone(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[420,17] cannot find symbol
+[ERROR]   symbol:   method setTimezone(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[423,17] cannot find symbol
+[ERROR]   symbol:   method setLocale(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[426,17] cannot find symbol
+[ERROR]   symbol:   method setProfileImageUrl(java.lang.String)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[430,21] cannot find symbol
+[ERROR]   symbol:   method logUserProfileUpdate(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[446,13] cannot find symbol
+[ERROR]   symbol:   method activate()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[447,13] cannot find symbol
+[ERROR]   symbol:   method setUpdatedBy(java.util.UUID)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[450,21] cannot find symbol
+[ERROR]   symbol:   method logUserActivation(com.bthl.healthcare.model.User,java.util.UUID)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[465,13] cannot find symbol
+[ERROR]   symbol:   method deactivate()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[466,13] cannot find symbol
+[ERROR]   symbol:   method setUpdatedBy(java.util.UUID)
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[469,21] cannot find symbol
+[ERROR]   symbol:   method logUserDeactivation(com.bthl.healthcare.model.User,java.util.UUID)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[644,21] cannot find symbol
+[ERROR]   symbol:   method getAccountLockedUntil()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[646,29] cannot find symbol
+[ERROR]   symbol:   method logAccountUnlock(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[356,58] package java.time.ChronoUnit does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[423,26] portfolio has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[431,26] portfolio has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[444,31] employeesEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[444,62] employeesEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[448,31] dependentsEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/CompanyHealthcarePortfolio.java:[448,63] dependentsEnrolled has private access in com.bthl.healthcare.model.PortfolioPlan
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[318,35] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[348,61] package java.time.ChronoUnit does not exist
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[361,31] isActive has private access in com.bthl.healthcare.model.BrokerProviderRelationship
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceBroker.java:[566,48] cannot find symbol
+[ERROR]   symbol:   method getDisplayName()
+[ERROR]   location: variable user of type com.bthl.healthcare.model.User
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/model/InsuranceProvider.java:[395,98] isActive has private access in com.bthl.healthcare.model.BrokerProviderRelationship
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[132,21] cannot find symbol
+[ERROR]   symbol:   method includeSubdomains(boolean)
+[ERROR]   location: class org.springframework.security.config.annotation.web.configurers.HeadersConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.HstsConfig
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/SecurityConfig.java:[136,17] cannot find symbol
+[ERROR]   symbol:   method permissionsPolicy((permissio[...]usb"))
+[ERROR]   location: class org.springframework.security.config.annotation.web.configurers.HeadersConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.ReferrerPolicyConfig
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/controller/WebController.java:[328,58] displayName has private access in com.bthl.healthcare.model.enums.UserType
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
