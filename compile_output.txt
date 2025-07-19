@@ -9,6 +9,9 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ bthl-healthcare ---
+[INFO] Deleting /Users/dstjohn/dev/02_davestj.com/bthl-hc/target
+[INFO] 
 [INFO] --- jacoco:0.8.11:prepare-agent (default) @ bthl-healthcare ---
 [INFO] argLine set to -javaagent:/Users/dstjohn/.m2/repository/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar=destfile=/Users/dstjohn/dev/02_davestj.com/bthl-hc/target/jacoco.exec
 [INFO] 
@@ -18,7 +21,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] 
 [INFO] --- compiler:3.11.0:compile (default-compile) @ bthl-healthcare ---
 [INFO] Changes detected - recompiling the module! :source
-[INFO] Compiling 43 source files with javac [debug release 21] to target/classes
+[INFO] Compiling 46 source files with javac [debug release 21] to target/classes
 [INFO] -------------------------------------------------------------
 [WARNING] COMPILATION WARNING : 
 [INFO] -------------------------------------------------------------
@@ -115,10 +118,9 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[135,13] cannot find symbol
   symbol:   method setEmailVerificationToken(java.lang.String)
   location: variable user of type com.bthl.healthcare.model.User
-[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] method logUserCreation in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
-  required: java.util.UUID,java.lang.String
-  found:    com.bthl.healthcare.model.User
-  reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] cannot find symbol
+  symbol:   method logUserCreation(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[142,21] cannot find symbol
   symbol:   method sendEmailVerificationAsync(java.lang.String,java.lang.String)
   location: variable emailService of type com.bthl.healthcare.service.EmailService
@@ -182,10 +184,9 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[277,13] cannot find symbol
   symbol:   method clearPasswordResetToken()
   location: variable user of type com.bthl.healthcare.model.User
-[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] method logPasswordChange in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
-  required: java.util.UUID,java.lang.String
-  found:    com.bthl.healthcare.model.User
-  reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] cannot find symbol
+  symbol:   method logPasswordChange(com.bthl.healthcare.model.User)
+  location: variable auditService of type com.bthl.healthcare.service.AuditService
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[283,21] cannot find symbol
   symbol:   method sendPasswordChangeNotificationAsync(java.lang.String)
   location: variable emailService of type com.bthl.healthcare.service.EmailService
@@ -298,8 +299,8 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.974 s
-[INFO] Finished at: 2025-07-18T20:35:26-07:00
+[INFO] Total time:  1.859 s
+[INFO] Finished at: 2025-07-18T21:16:46-07:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project bthl-healthcare: Compilation failure: Compilation failure: 
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/security/jwt/JwtTokenProvider.java:[22,21] package com.auth0.jwt does not exist
@@ -385,10 +386,9 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[135,13] cannot find symbol
 [ERROR]   symbol:   method setEmailVerificationToken(java.lang.String)
 [ERROR]   location: variable user of type com.bthl.healthcare.model.User
-[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] method logUserCreation in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
-[ERROR]   required: java.util.UUID,java.lang.String
-[ERROR]   found:    com.bthl.healthcare.model.User
-[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[139,21] cannot find symbol
+[ERROR]   symbol:   method logUserCreation(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[142,21] cannot find symbol
 [ERROR]   symbol:   method sendEmailVerificationAsync(java.lang.String,java.lang.String)
 [ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
@@ -452,10 +452,9 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[277,13] cannot find symbol
 [ERROR]   symbol:   method clearPasswordResetToken()
 [ERROR]   location: variable user of type com.bthl.healthcare.model.User
-[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] method logPasswordChange in class com.bthl.healthcare.service.AuditService cannot be applied to given types;
-[ERROR]   required: java.util.UUID,java.lang.String
-[ERROR]   found:    com.bthl.healthcare.model.User
-[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[280,21] cannot find symbol
+[ERROR]   symbol:   method logPasswordChange(com.bthl.healthcare.model.User)
+[ERROR]   location: variable auditService of type com.bthl.healthcare.service.AuditService
 [ERROR] /Users/dstjohn/dev/02_davestj.com/bthl-hc/src/main/java/com/bthl/healthcare/service/UserService.java:[283,21] cannot find symbol
 [ERROR]   symbol:   method sendPasswordChangeNotificationAsync(java.lang.String)
 [ERROR]   location: variable emailService of type com.bthl.healthcare.service.EmailService
