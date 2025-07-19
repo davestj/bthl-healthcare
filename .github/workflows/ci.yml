@@ -1,0 +1,23 @@
+name: BTHL-HealthCare CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+
+env:
+  JAVA_VERSION: 21
+  MAVEN_OPTS: -Xmx2048m -XX:MaxMetaspaceSize=512m
+  BASE_VERSION: 1.2.0-alpha
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: temurin
+    - run: mvn validate
+    - run: mvn clean test
+    - run: mvn compile package -DskipTests
