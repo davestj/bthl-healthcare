@@ -32,6 +32,27 @@ The BTHL-HealthCare platform is a comprehensive healthcare management system bui
 
 ---
 
+## 🔐 Required Environment Variables
+
+The application loads sensitive configuration from environment variables. Copy `.env.example` to `.env` and provide values for the following keys:
+
+- `DB_URL` – JDBC connection string for PostgreSQL
+- `DB_USERNAME` – database username
+- `DB_PASSWORD` – database password
+- `JWT_SECRET` – secret key used to sign JSON Web Tokens
+- `ADMIN_USERNAME` – initial Spring Security admin user
+- `ADMIN_PASSWORD` – password for the admin user
+- `EMAIL_USERNAME` – SMTP username for sending email notifications
+- `EMAIL_PASSWORD` – SMTP password for sending email notifications
+- `TEST_DB_USERNAME` – optional H2 database username for tests (defaults to `sa`)
+- `TEST_DB_PASSWORD` – optional H2 database password for tests (defaults to empty)
+
+These variables are required for both local development and production deployments.
+
+The `.env` file is intentionally excluded from version control. Use `.env.example` as a template and populate a local `.env` file with development-only values that should never be committed.
+
+---
+
 ## 🚀 Quick Start (Automated Bootstrap)
 
 ### Option 1: Automated Setup with Bootstrap Script
@@ -205,7 +226,7 @@ sudo systemctl status postgresql
 sudo -u postgres psql << 'EOF'
 -- Create application user
 CREATE USER davestj WITH SUPERUSER CREATEDB CREATEROLE LOGIN;
-ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';
+ALTER USER davestj WITH PASSWORD '<your_db_password>';
 
 -- Create application database
 CREATE DATABASE bthl_healthcare OWNER davestj;
@@ -330,7 +351,7 @@ createuser -s davestj
 createdb bthl_healthcare -O davestj
 
 # Set password for database user
-psql -d bthl_healthcare -c "ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';"
+psql -d bthl_healthcare -c "ALTER USER davestj WITH PASSWORD '<your_db_password>';"
 
 # Test connection
 psql -U davestj -d bthl_healthcare -c "SELECT version();"
@@ -397,9 +418,9 @@ spring:
     active: dev
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
@@ -499,9 +520,9 @@ spring:
       on-profile: dev
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   
   jpa:
     show-sql: true
@@ -1114,7 +1135,7 @@ psql -U davestj -d bthl_healthcare -c "SELECT 1;"
 sudo tail -f /var/log/postgresql/postgresql-*-main.log
 
 # Reset database password if needed
-sudo -u postgres psql -c "ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';"
+sudo -u postgres psql -c "ALTER USER davestj WITH PASSWORD '<your_db_password>';"
 ```
 
 **Issue 3: Memory Issues**
@@ -1160,7 +1181,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=bthl_healthcare
 DB_USERNAME=davestj
-DB_PASSWORD=bthl_dev_password_2025
+DB_PASSWORD=change_me
 DB_URL=jdbc:postgresql://localhost:5432/bthl_healthcare
 
 # JWT Configuration

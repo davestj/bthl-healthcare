@@ -21,9 +21,9 @@ spring:
     active: dev
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
@@ -60,8 +60,8 @@ spring:
   
   security:
     user:
-      name: admin
-      password: admin
+      name: ${ADMIN_USERNAME}
+      password: ${ADMIN_PASSWORD}
   
   servlet:
     multipart:
@@ -93,7 +93,7 @@ management:
 bthl:
   healthcare:
     jwt:
-      secret: "bthl_healthcare_jwt_secret_key_change_in_production"
+      secret: ${JWT_SECRET}
       expiration: 86400000  # 24 hours
     security:
       password:
@@ -110,10 +110,10 @@ bthl:
       smtp:
         host: localhost
         port: 1025
-        username: ""
-        password: ""
-        auth: false
-        starttls: false
+        username: ${EMAIL_USERNAME:}
+        password: ${EMAIL_PASSWORD:}
+        auth: ${EMAIL_SMTP_AUTH:false}
+        starttls: ${EMAIL_SMTP_STARTTLS:false}
 
 ---
 # Development Profile
@@ -121,11 +121,11 @@ spring:
   config:
     activate:
       on-profile: dev
-  
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   
   jpa:
     show-sql: true
@@ -148,8 +148,8 @@ spring:
       on-profile: prod
   
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
-    username: ${DB_USERNAME:davestj}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   
   jpa:
@@ -164,7 +164,7 @@ logging:
 bthl:
   healthcare:
     jwt:
-      secret: ${JWT_SECRET:}
+      secret: ${JWT_SECRET}
 
 ---
 # Test Profile
@@ -176,8 +176,8 @@ spring:
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
+    username: ${TEST_DB_USERNAME:sa}
+    password: ${TEST_DB_PASSWORD:}
   
   jpa:
     hibernate:
