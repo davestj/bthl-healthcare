@@ -33,56 +33,52 @@ public class EmailService {
     public void sendEmailVerificationAsync(String email, String token) {
         String subject = "Verify Your Email";
         String text = "Please verify your email using this token: " + token;
-        send(buildMessage(email, subject, text));
+        sendMessage(email, subject, text);
     }
 
     @Async
     public void sendAccountLockoutNotificationAsync(String email, int lockoutMinutes) {
         String subject = "Account Locked";
-        String text = "Your account has been locked for " + lockoutMinutes + " minutes due to multiple failed login attempts.";
-        send(buildMessage(email, subject, text));
+        String text = "Your account has been locked for " + lockoutMinutes
+                + " minutes due to multiple failed login attempts.";
+        sendMessage(email, subject, text);
     }
 
     @Async
     public void sendPasswordChangeNotificationAsync(String email) {
         String subject = "Password Changed";
         String text = "Your password was recently changed. If this wasn't you, please contact support immediately.";
-        send(buildMessage(email, subject, text));
+        sendMessage(email, subject, text);
     }
 
     @Async
     public void sendPasswordResetEmailAsync(String email, String resetToken) {
         String subject = "Password Reset Request";
         String text = "Use the following token to reset your password: " + resetToken;
-        send(buildMessage(email, subject, text));
+        sendMessage(email, subject, text);
     }
 
     @Async
     public void sendPasswordResetConfirmationAsync(String email) {
         String subject = "Password Reset Confirmation";
         String text = "Your password has been reset successfully.";
-        send(buildMessage(email, subject, text));
+        sendMessage(email, subject, text);
     }
 
     public void sendSimpleEmail(String email, String subject, String text) {
-        send(buildMessage(email, subject, text));
+        sendMessage(email, subject, text);
     }
 
-    private SimpleMailMessage buildMessage(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        return message;
-    }
-
-    private void send(SimpleMailMessage message) {
-        String recipient = String.join(", ", message.getTo());
+    private void sendMessage(String to, String subject, String text) {
         try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(text);
             mailSender.send(message);
-            logger.debug("Sent email to {}", recipient);
+            logger.debug("Sent email to {}", to);
         } catch (Exception e) {
-            logger.error("Failed to send email to {}", recipient, e);
+            logger.error("Failed to send email to {}", to, e);
         }
     }
 
