@@ -81,7 +81,7 @@ public class AuthController {
         logger.info("Registration attempt for username: {}", registrationDto.getUsername());
         try {
             // I validate password confirmation if provided
-            if (registrationDto.getPassword() != null && !registrationDto.getPassword().equals(registrationDto.getPassword())) {
+            if (!passwordsMatch(registrationDto)) {
                 return ResponseEntity.badRequest()
                     .body(createErrorResponse("Password confirmation does not match"));
             }
@@ -367,6 +367,13 @@ public class AuthController {
     }
 
     // I implement helper methods for response creation
+
+    /**
+     * I check whether the provided password and confirmation match.
+     */
+    private boolean passwordsMatch(UserRegistrationDto dto) {
+        return dto.getPassword() != null && dto.getPassword().equals(dto.getConfirmPassword());
+    }
 
     /**
      * I create standardized error responses for consistent API error handling.
