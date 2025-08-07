@@ -32,6 +32,27 @@ The BTHL-HealthCare platform is a comprehensive healthcare management system bui
 
 ---
 
+## 🔐 Required Environment Variables
+
+The application loads sensitive configuration from environment variables. Copy `.env.example` to `.env` and provide values for the following keys:
+
+- `DB_URL` – JDBC connection string for PostgreSQL
+- `DB_USERNAME` – database username
+- `DB_PASSWORD` – database password
+- `JWT_SECRET` – secret key used to sign JSON Web Tokens
+- `ADMIN_USERNAME` – initial Spring Security admin user
+- `ADMIN_PASSWORD` – password for the admin user
+- `EMAIL_USERNAME` – SMTP username for sending email notifications
+- `EMAIL_PASSWORD` – SMTP password for sending email notifications
+- `TEST_DB_USERNAME` – optional H2 database username for tests (defaults to `sa`)
+- `TEST_DB_PASSWORD` – optional H2 database password for tests (defaults to empty)
+
+These variables are required for both local development and production deployments.
+
+The `.env` file is intentionally excluded from version control. Use `.env.example` as a template and populate a local `.env` file with development-only values that should never be committed.
+
+---
+
 ## 🚀 Quick Start (Automated Bootstrap)
 
 ### Option 1: Automated Setup with Bootstrap Script
@@ -205,7 +226,9 @@ sudo systemctl status postgresql
 sudo -u postgres psql << 'EOF'
 -- Create application user
 CREATE USER davestj WITH SUPERUSER CREATEDB CREATEROLE LOGIN;
-ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';
+
+ALTER USER davestj WITH PASSWORD '<DEV_PASSWORD>';
+
 
 -- Create application database
 CREATE DATABASE bthl_healthcare OWNER davestj;
@@ -330,7 +353,9 @@ createuser -s davestj
 createdb bthl_healthcare -O davestj
 
 # Set password for database user
-psql -d bthl_healthcare -c "ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';"
+
+psql -d bthl_healthcare -c "ALTER USER davestj WITH PASSWORD '<DEV_PASSWORD>';"
+
 
 # Test connection
 psql -U davestj -d bthl_healthcare -c "SELECT version();"
@@ -394,12 +419,12 @@ spring:
     name: BTHL-HealthCare
   
   profiles:
-    active: dev
-  
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
@@ -436,8 +461,8 @@ spring:
   
   security:
     user:
-      name: admin
-      password: admin
+      name: ${ADMIN_USERNAME:admin}
+      password: ${ADMIN_PASSWORD}
   
   servlet:
     multipart:
@@ -469,7 +494,7 @@ management:
 bthl:
   healthcare:
     jwt:
-      secret: "bthl_healthcare_jwt_secret_key_change_in_production"
+      secret: ${JWT_SECRET}
       expiration: 86400000  # 24 hours
     security:
       password:
@@ -497,12 +522,12 @@ spring:
   config:
     activate:
       on-profile: dev
-  
+    
   datasource:
-    url: jdbc:postgresql://localhost:5432/bthl_healthcare
-    username: davestj
-    password: bthl_dev_password_2025
-  
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
   jpa:
     show-sql: true
   
@@ -540,7 +565,7 @@ logging:
 bthl:
   healthcare:
     jwt:
-      secret: ${JWT_SECRET:}
+      secret: ${JWT_SECRET}
 
 ---
 # Test Profile
@@ -1114,7 +1139,9 @@ psql -U davestj -d bthl_healthcare -c "SELECT 1;"
 sudo tail -f /var/log/postgresql/postgresql-*-main.log
 
 # Reset database password if needed
-sudo -u postgres psql -c "ALTER USER davestj WITH PASSWORD 'bthl_dev_password_2025';"
+
+sudo -u postgres psql -c "ALTER USER davestj WITH PASSWORD '<DEV_PASSWORD>';"
+
 ```
 
 **Issue 3: Memory Issues**
@@ -1160,12 +1187,16 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=bthl_healthcare
 DB_USERNAME=davestj
-DB_PASSWORD=bthl_dev_password_2025
+DB_PASSWORD=changeme
 DB_URL=jdbc:postgresql://localhost:5432/bthl_healthcare
 
 # JWT Configuration
-JWT_SECRET=bthl_healthcare_jwt_secret_key_change_in_production_2025
+JWT_SECRET=changeme
 JWT_EXPIRATION=86400000
+
+# Admin User
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=changeme
 
 # Email Configuration
 SMTP_HOST=localhost
@@ -1197,6 +1228,10 @@ EOF
 # Secure the environment file
 chmod 600 /var/www/davestj.com/bthl-hc/.env
 ```
+
+The `.env` file is excluded from version control and should never be committed.
+
+A `.env.example` file is available; copy it to `.env` and replace placeholder values for local development.
 
 ---
 
