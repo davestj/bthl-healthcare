@@ -33,25 +33,32 @@ class AuthControllerTest {
     @MockBean
     private AuthenticationManager authenticationManager;
 
+
+    @MockBean
+    private UserService userService;
+
+
     @MockBean
     private JwtTokenProvider jwtTokenProvider;
 
     @Test
-    void registerUser_returnsBadRequestWhenPasswordsDoNotMatch() throws Exception {
+    void registerUser_returnsBadRequest_whenPasswordsDoNotMatch() throws Exception {
+
         UserRegistrationDto dto = new UserRegistrationDto();
         dto.setUsername("testuser");
         dto.setEmail("test@example.com");
         dto.setPassword("Password123!");
-        dto.setConfirmPassword("Mismatch123!");
-        dto.setFirstName("Test");
-        dto.setLastName("User");
+        dto.setConfirmPassword("Different123!");
+        dto.setFirstName("John");
+        dto.setLastName("Doe");
         dto.setUserType(UserType.COMPANY_USER);
         dto.setAcceptTerms(true);
         dto.setAcceptPrivacyPolicy(true);
 
         mockMvc.perform(post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.error").value("Password confirmation does not match"));
     }
 }
