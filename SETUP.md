@@ -42,8 +42,14 @@ The application loads sensitive configuration from environment variables. Copy `
 - `JWT_SECRET` – secret key used to sign JSON Web Tokens
 - `ADMIN_USERNAME` – initial Spring Security admin user
 - `ADMIN_PASSWORD` – password for the admin user
+- `EMAIL_USERNAME` – SMTP username for sending email notifications
+- `EMAIL_PASSWORD` – SMTP password for sending email notifications
+- `TEST_DB_USERNAME` – optional H2 database username for tests (defaults to `sa`)
+- `TEST_DB_PASSWORD` – optional H2 database password for tests (defaults to empty)
 
 These variables are required for both local development and production deployments.
+
+The `.env` file is intentionally excluded from version control. Use `.env.example` as a template and populate a local `.env` file with development-only values that should never be committed.
 
 ---
 
