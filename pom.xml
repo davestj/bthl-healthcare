@@ -306,9 +306,9 @@ TODO: Integrate SonarQube quality gates and security scanning
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway.version}</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5432/bthl_healthcare</url>
-                    <user>davestj</user>
-                    <password>bthl_dev_password_2025</password>
+                    <url>${env.DB_URL}</url>
+                    <user>${env.DB_USERNAME}</user>
+                    <password>${env.DB_PASSWORD}</password>
                     <locations>
                         <location>classpath:db/migration</location>
                     </locations>
