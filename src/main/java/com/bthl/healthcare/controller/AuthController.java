@@ -81,7 +81,9 @@ public class AuthController {
         logger.info("Registration attempt for username: {}", registrationDto.getUsername());
         try {
             // I validate password confirmation if provided
-            if (registrationDto.getPassword() != null && !registrationDto.getPassword().equals(registrationDto.getPassword())) {
+            if (registrationDto.getPassword() != null &&
+                registrationDto.getConfirmPassword() != null &&
+                !registrationDto.getPassword().equals(registrationDto.getConfirmPassword())) {
                 return ResponseEntity.badRequest()
                     .body(createErrorResponse("Password confirmation does not match"));
             }
