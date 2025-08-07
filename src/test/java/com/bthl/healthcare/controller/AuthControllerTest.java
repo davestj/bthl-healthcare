@@ -15,7 +15,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthController.class)
@@ -29,16 +28,22 @@ class AuthControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
+    private UserService userService;
+
+    @MockBean
     private AuthenticationManager authenticationManager;
+
 
     @MockBean
     private UserService userService;
+
 
     @MockBean
     private JwtTokenProvider jwtTokenProvider;
 
     @Test
     void registerUser_returnsBadRequest_whenPasswordsDoNotMatch() throws Exception {
+
         UserRegistrationDto dto = new UserRegistrationDto();
         dto.setUsername("testuser");
         dto.setEmail("test@example.com");

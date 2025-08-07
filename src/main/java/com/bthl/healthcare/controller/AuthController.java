@@ -376,6 +376,13 @@ public class AuthController {
     }
 
     /**
+     * I check whether the provided password and confirmation match.
+     */
+    private boolean passwordsMatch(UserRegistrationDto dto) {
+        return dto.getPassword() != null && dto.getPassword().equals(dto.getConfirmPassword());
+    }
+
+    /**
      * I create standardized error responses for consistent API error handling.
      */
     private Map<String, Object> createErrorResponse(String message) {
