@@ -110,10 +110,10 @@ bthl:
       smtp:
         host: localhost
         port: 1025
-        username: ""
-        password: ""
-        auth: false
-        starttls: false
+        username: ${EMAIL_USERNAME:}
+        password: ${EMAIL_PASSWORD:}
+        auth: ${EMAIL_SMTP_AUTH:false}
+        starttls: ${EMAIL_SMTP_STARTTLS:false}
 
 ---
 # Development Profile
@@ -121,6 +121,11 @@ spring:
   config:
     activate:
       on-profile: dev
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bthl_healthcare}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
   
   jpa:
     show-sql: true
@@ -171,8 +176,8 @@ spring:
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
+    username: ${TEST_DB_USERNAME:sa}
+    password: ${TEST_DB_PASSWORD:}
   
   jpa:
     hibernate:
